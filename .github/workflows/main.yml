@@ -1,0 +1,19 @@
+name: ASTRA-MED Codespace Recovery
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  codespaces: write
+
+jobs:
+  restart:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check and restart Codespace
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh codespace list --repo WhovianCoder136/NASA-SPACE-HACKATHON
