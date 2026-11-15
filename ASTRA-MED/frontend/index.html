@@ -3,116 +3,179 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ASTRA-MED Autonomous Deep-Space Health Monitoring Dashboard">
-  <title>ASTRA-MED Mission Control</title>
+  <meta name="description" content="ASTRA-MED Autonomous Deep-Space Health & Acclimatization System — Deep Space Mission Control Console">
+  <title>ASTRA-MED — Mission Control & Medical Intelligence</title>
   <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
-  <!-- ── Sidebar Navigation ─────────────────────────────────────── -->
-  <nav class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="logo">
-        <span class="logo-icon">🛡️</span>
-        <div class="logo-text">
-          <h1>ASTRA-MED</h1>
-          <span class="logo-subtitle">Mission Control</span>
+  <div class="app-layout">
+    <!-- ── Sidebar Navigation Rail ─────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-crest">🛡️</div>
+          <div class="logo-text">
+            <h1 class="logo-title">ASTRA-MED</h1>
+            <span class="logo-subtitle">DEEP-SPACE MEDICAL INTEL</span>
+          </div>
+        </div>
+
+        <!-- Astronaut Session Profile Badge -->
+        <div class="session-badge" id="session-badge" onclick="window.showAuthModal()" title="Switch active astronaut profile">
+          <div class="session-avatar" id="session-avatar">SC</div>
+          <div class="session-info">
+            <div class="session-label">Active Astronaut</div>
+            <div class="session-name" id="session-astronaut-name">CDR Sarah Chen, MD</div>
+            <div class="session-role" id="session-astronaut-id">ASTRA-001 (Flight Surgeon)</div>
+          </div>
+          <div class="session-switch-icon">⇄</div>
         </div>
       </div>
-      <!-- Astronaut Session Profile Badge -->
-      <div class="session-badge" id="session-badge" onclick="window.showAuthModal()" style="margin-top: 0.75rem; padding: 0.5rem; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
-        <div style="overflow: hidden;">
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Active Astronaut:</div>
-          <div id="session-astronaut-name" style="font-size: 0.85rem; font-weight: 600; color: var(--teal); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">CDR Sarah Chen</div>
-          <div id="session-astronaut-id" style="font-size: 0.75rem; color: var(--text-secondary);">ASTRA-001 (Flight Surgeon)</div>
-        </div>
-        <span style="font-size: 1rem; color: var(--text-muted);">🔑</span>
+
+      <!-- Grouped Navigation Links -->
+      <div class="sidebar-nav-container">
+        <ul class="nav-links">
+          <!-- MISSION OPERATIONS -->
+          <li class="nav-section-title"><span>MISSION OPERATIONS</span></li>
+          <li><a href="#/dashboard" class="nav-link active" data-route="dashboard">
+            <span class="nav-icon">📊</span><span class="nav-label">Mission Dashboard</span>
+          </a></li>
+          <li><a href="#/crew" class="nav-link" data-route="crew">
+            <span class="nav-icon">👨‍🚀</span><span class="nav-label">Astronaut Roster</span>
+          </a></li>
+
+          <!-- HEALTH MONITORING (7 Clinical Subsystems) -->
+          <li class="nav-section-title"><span>HEALTH MONITORING (7)</span></li>
+          <li><a href="#/cardiovascular" class="nav-link" data-route="cardiovascular">
+            <span class="nav-icon">❤️</span><span class="nav-label">Cardiovascular</span>
+          </a></li>
+          <li><a href="#/immune" class="nav-link" data-route="immune">
+            <span class="nav-icon">🧬</span><span class="nav-label">Immune System</span>
+          </a></li>
+          <li><a href="#/metabolic" class="nav-link" data-route="metabolic">
+            <span class="nav-icon">⚗️</span><span class="nav-label">Metabolic Health</span>
+          </a></li>
+          <li><a href="#/radiation" class="nav-link" data-route="radiation">
+            <span class="nav-icon">☢️</span><span class="nav-label">Radiation Dosimetry</span>
+          </a></li>
+          <li><a href="#/sleep" class="nav-link" data-route="sleep">
+            <span class="nav-icon">🌙</span><span class="nav-label">Sleep & Circadian</span>
+          </a></li>
+          <li><a href="#/neuromuscular" class="nav-link" data-route="neuromuscular">
+            <span class="nav-icon">💪</span><span class="nav-label">Neuromuscular</span>
+          </a></li>
+          <li><a href="#/sans" class="nav-link" data-route="sans">
+            <span class="nav-icon">👁️</span><span class="nav-label">SANS Neuro-Ocular</span>
+          </a></li>
+
+          <!-- MEDICAL OPERATIONS -->
+          <li class="nav-section-title"><span>MEDICAL OPERATIONS</span></li>
+          <li><a href="#/health-checkup" class="nav-link nav-link-featured" data-route="health-checkup">
+            <span class="nav-icon">🩺</span><span class="nav-label">Health Checkup</span>
+            <span class="nav-tag">INPUT</span>
+          </a></li>
+          <li><a href="#/health-records" class="nav-link" data-route="health-records">
+            <span class="nav-icon">📂</span><span class="nav-label">Medical Records</span>
+          </a></li>
+          <li><a href="#/insights" class="nav-link" data-route="insights">
+            <span class="nav-icon">💡</span><span class="nav-label">Clinical Insights</span>
+          </a></li>
+          <li><a href="#/action-cards" class="nav-link" data-route="action-cards">
+            <span class="nav-icon">📋</span><span class="nav-label">Clinical Protocols</span>
+          </a></li>
+          <li><a href="#/medical-comms" class="nav-link" data-route="medical-comms">
+            <span class="nav-icon">📡</span><span class="nav-label">Earth Medical Comms</span>
+          </a></li>
+
+          <!-- CLINICAL INTELLIGENCE -->
+          <li class="nav-section-title"><span>CLINICAL INTELLIGENCE</span></li>
+          <li><a href="#/alerts" class="nav-link" data-route="alerts">
+            <span class="nav-icon">🚨</span><span class="nav-label">Active Alerts</span>
+          </a></li>
+          <li><a href="#/baselines" class="nav-link" data-route="baselines">
+            <span class="nav-icon">📈</span><span class="nav-label">Physiological Baselines</span>
+          </a></li>
+          <li><a href="#/biosamples" class="nav-link" data-route="biosamples">
+            <span class="nav-icon">🧪</span><span class="nav-label">BioSamples</span>
+          </a></li>
+          <li><a href="#/ground-review" class="nav-link" data-route="ground-review">
+            <span class="nav-icon">🌍</span><span class="nav-label">Ground Telemedicine</span>
+          </a></li>
+        </ul>
       </div>
+
+      <!-- Sidebar Status Footer -->
+      <div class="sidebar-footer">
+        <div class="connection-status" id="connection-status">
+          <span class="status-dot online"></span>
+          <div class="status-details">
+            <span class="status-title">FLIGHT SYSTEM ONLINE</span>
+            <span class="status-sub">Autonomous Mode Active</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Main App Shell Wrapper ──────────────────────────────────── -->
+    <div class="main-wrapper">
+      <!-- ── Top Aerospace Telemetry Header ────────────────────────── -->
+      <header class="top-header" id="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="header-breadcrumbs">
+            <span class="crumb-mission">ASTRA-1</span>
+            <span class="crumb-sep">/</span>
+            <span class="crumb-current" id="header-breadcrumb">Mission Dashboard</span>
+          </div>
+        </div>
+
+        <div class="header-center">
+          <div class="telemetry-badge met-badge" title="Mission Elapsed Time">
+            <span class="badge-dot-green">●</span>
+            <span class="badge-label">MET:</span>
+            <span class="badge-value" id="header-met-time">DAY 142.4</span>
+          </div>
+          <div class="telemetry-badge comms-badge" title="Deep space communication latency to Earth Mission Control">
+            <span class="latency-pulse"></span>
+            <span class="badge-label">EARTH LINK:</span>
+            <span class="badge-value">20m DELAY</span>
+          </div>
+          <div class="telemetry-badge status-badge-nominal" id="header-status-pill">
+            <span class="badge-label">SYSTEM:</span>
+            <span class="badge-value" id="header-sys-status">NOMINAL</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <a href="#/health-checkup" class="btn btn-sm btn-teal">+ Health Checkup</a>
+          <div class="header-user-card" onclick="window.showAuthModal()" title="Switch active astronaut account">
+            <div class="user-avatar" id="header-user-avatar">SC</div>
+            <div class="user-text">
+              <span class="user-name" id="header-user-name">CDR Sarah Chen</span>
+              <span class="user-role" id="header-user-role">Flight Surgeon</span>
+            </div>
+            <span class="user-caret">▾</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── Main Content Area ───────────────────────────────────── -->
+      <main class="main-content">
+        <div id="app" class="app-container">
+          <!-- SPA content rendered here by router -->
+        </div>
+      </main>
     </div>
+  </div>
 
-    <ul class="nav-links">
-      <li><a href="#/dashboard" class="nav-link active" data-route="dashboard">
-        <span class="nav-icon">📊</span><span class="nav-label">Dashboard</span>
-      </a></li>
-      <li><a href="#/health-checkup" class="nav-link" data-route="health-checkup" style="background: rgba(20, 184, 166, 0.1); border-left: 3px solid var(--teal);">
-        <span class="nav-icon">🩺</span><span class="nav-label" style="font-weight: 600; color: var(--teal);">Health Checkup</span>
-      </a></li>
-      <li><a href="#/health-records" class="nav-link" data-route="health-records">
-        <span class="nav-icon">📂</span><span class="nav-label">Medical Records</span>
-      </a></li>
-      <li><a href="#/insights" class="nav-link" data-route="insights">
-        <span class="nav-icon">💡</span><span class="nav-label">Insight Centre</span>
-      </a></li>
-      <li><a href="#/medical-comms" class="nav-link" data-route="medical-comms">
-        <span class="nav-icon">📡</span><span class="nav-label">Medical Comms</span>
-      </a></li>
-      <li><a href="#/crew" class="nav-link" data-route="crew">
-        <span class="nav-icon">👨‍🚀</span><span class="nav-label">Astronauts</span>
-      </a></li>
-      <li class="nav-divider"><span class="nav-section-title">Health Modules (7)</span></li>
-      <li><a href="#/cardiovascular" class="nav-link" data-route="cardiovascular">
-        <span class="nav-icon">❤️</span><span class="nav-label">Cardiovascular</span>
-      </a></li>
-      <li><a href="#/immune" class="nav-link" data-route="immune">
-        <span class="nav-icon">🧬</span><span class="nav-label">Immune</span>
-      </a></li>
-      <li><a href="#/metabolic" class="nav-link" data-route="metabolic">
-        <span class="nav-icon">⚗️</span><span class="nav-label">Metabolic</span>
-      </a></li>
-      <li><a href="#/radiation" class="nav-link" data-route="radiation">
-        <span class="nav-icon">☢️</span><span class="nav-label">Radiation</span>
-      </a></li>
-      <li><a href="#/sleep" class="nav-link" data-route="sleep">
-        <span class="nav-icon">🌙</span><span class="nav-label">Sleep & Circadian</span>
-      </a></li>
-      <li><a href="#/neuromuscular" class="nav-link" data-route="neuromuscular">
-        <span class="nav-icon">💪</span><span class="nav-label">Neuromuscular</span>
-      </a></li>
-      <li><a href="#/sans" class="nav-link" data-route="sans">
-        <span class="nav-icon">👁️</span><span class="nav-label">SANS</span>
-      </a></li>
-      <li class="nav-divider"><span class="nav-section-title">Clinical Support</span></li>
-      <li><a href="#/alerts" class="nav-link" data-route="alerts">
-        <span class="nav-icon">🚨</span><span class="nav-label">Alerts</span>
-      </a></li>
-      <li><a href="#/action-cards" class="nav-link" data-route="action-cards">
-        <span class="nav-icon">📋</span><span class="nav-label">Action Cards</span>
-      </a></li>
-      <li><a href="#/baselines" class="nav-link" data-route="baselines">
-        <span class="nav-icon">📈</span><span class="nav-label">Baselines</span>
-      </a></li>
-      <li><a href="#/biosamples" class="nav-link" data-route="biosamples">
-        <span class="nav-icon">🧪</span><span class="nav-label">BioSamples</span>
-      </a></li>
-      <li><a href="#/ground-review" class="nav-link" data-route="ground-review">
-        <span class="nav-icon">🌍</span><span class="nav-label">Ground Telemedicine</span>
-      </a></li>
-    </ul>
-
-    <!-- Connection Status -->
-    <div class="connection-status" id="connection-status">
-      <span class="status-dot online"></span>
-      <span class="status-text">System Online</span>
-    </div>
-  </nav>
-
-  <!-- ── Mobile Sidebar Toggle ──────────────────────────────────── -->
-  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">
-    <span></span><span></span><span></span>
-  </button>
-
-  <!-- ── Main Content Area ──────────────────────────────────────── -->
-  <main class="main-content">
-    <div id="app" class="app-container">
-      <!-- SPA content rendered here by router -->
-    </div>
-  </main>
-
-  <!-- ── Modal Overlay ──────────────────────────────────────────── -->
+  <!-- ── Modal Overlay ───────────────────────────────────────────── -->
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal-content" id="modal-content"></div>
   </div>
 
-  <!-- ── Scripts (order matters) ────────────────────────────────── -->
+  <!-- ── Core JavaScript Modules (order preserved) ───────────────── -->
   <script src="/static/js/api.js"></script>
   <script src="/static/js/components.js"></script>
   <script src="/static/js/router.js"></script>

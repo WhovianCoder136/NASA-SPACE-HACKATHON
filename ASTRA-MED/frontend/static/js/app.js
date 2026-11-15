@@ -19,12 +19,65 @@ let currentCrewId = activeUser.id || 1;
 // Selected files for medical report uploads
 let selectedCheckupFiles = [];
 
+const routeTitles = {
+  '/dashboard': 'Mission Dashboard',
+  '/crew': 'Astronaut Roster',
+  '/cardiovascular': 'Cardiovascular Telemetry',
+  '/immune': 'Immune Biomarkers',
+  '/metabolic': 'Metabolic Health',
+  '/radiation': 'Radiation Dosimetry',
+  '/sleep': 'Sleep & Circadian Rhythms',
+  '/neuromuscular': 'Neuromuscular Assessment',
+  '/sans': 'SANS Neuro-Ocular Axis',
+  '/health-checkup': 'Health Checkup Intake',
+  '/health-records': 'Medical Dossier & Records',
+  '/insights': 'Clinical Insights Centre',
+  '/action-cards': 'Clinical Protocols & Action Cards',
+  '/medical-comms': 'Earth Medical Comms',
+  '/alerts': 'Active Physiological Alerts',
+  '/baselines': 'Physiological Baselines',
+  '/biosamples': 'BioSample Inventory',
+  '/ground-review': 'Ground Telemedicine Review',
+};
+
+window.updateHeaderBreadcrumb = () => {
+  const rawHash = (window.location.hash.slice(1) || '/dashboard').split('?')[0];
+  const cleanPath = rawHash.startsWith('/') ? rawHash : `/${rawHash}`;
+  const title = routeTitles[cleanPath] || 'Mission Operations';
+  const el = document.getElementById('header-breadcrumb');
+  if (el) el.textContent = title;
+};
+
+window.addEventListener('hashchange', () => window.updateHeaderBreadcrumb());
+window.addEventListener('DOMContentLoaded', () => {
+  window.updateSessionBadge();
+  window.updateHeaderBreadcrumb();
+});
+
 window.updateSessionBadge = () => {
   const nameEl = document.getElementById('session-astronaut-name');
   const idEl = document.getElementById('session-astronaut-id');
-  if (nameEl && idEl && activeUser) {
-    nameEl.textContent = activeUser.name;
-    idEl.textContent = `${activeUser.astronaut_id} (${activeUser.is_medical_officer ? 'Medical Officer' : 'Astronaut'})`;
+  const avatarEl = document.getElementById('session-avatar');
+  const hNameEl = document.getElementById('header-user-name');
+  const hRoleEl = document.getElementById('header-user-role');
+  const hAvatarEl = document.getElementById('header-user-avatar');
+
+  if (activeUser) {
+    const initials = (activeUser.name || 'SC')
+      .replace(/CDR|PLT|MS|DR|MD|,/g, '')
+      .trim()
+      .split(/\s+/)
+      .map((n) => n[0])
+      .slice(0, 2)
+      .join('')
+      .toUpperCase() || 'SC';
+
+    if (nameEl) nameEl.textContent = activeUser.name;
+    if (idEl) idEl.textContent = `${activeUser.astronaut_id} (${activeUser.is_medical_officer ? 'Medical Officer' : 'Astronaut'})`;
+    if (avatarEl) avatarEl.textContent = initials;
+    if (hNameEl) hNameEl.textContent = activeUser.name;
+    if (hRoleEl) hRoleEl.textContent = activeUser.is_medical_officer ? 'Flight Surgeon' : 'Astronaut';
+    if (hAvatarEl) hAvatarEl.textContent = initials;
   }
 };
 
