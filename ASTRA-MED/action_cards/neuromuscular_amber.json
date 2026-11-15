@@ -1,0 +1,19 @@
+{
+  "card_id": "CARD-NEU-AMBER-01",
+  "version": "1.0",
+  "hazard": "hazard_4_gravity_fields",
+  "severity": "AMBER",
+  "title": "Sensorimotor Vestibular Recalibration & Dynamic Gait Assistance",
+  "plain_language_summary": "Post-transition postural sway velocity, gait asymmetry index, or psychomotor response latency demonstrates incomplete adaptation.",
+  "crew_instructions": [
+    "Perform 15-minute guided Vestibulo-Ocular Reflex (VOR) gaze fixation training using the visual calibration helmet.",
+    "Utilize dual handrail support during intra-vehicular transit until postural sway stabilization index > 0.80.",
+    "Execute active closed-chain ankle/knee proprioceptive loading drills on the countermeasure vibration plate.",
+    "Re-run 3-minute Psychomotor Vigilance Task (PVT) before engaging in EVAs or robotic manipulator operations."
+  ],
+  "safety_limits": {
+    "max_sway_velocity_cm_s": 4.5,
+    "pvt_reaction_time_lapse_ms": 500.0
+  },
+  "de_escalation_criteria": "Gait asymmetry < 8%, postural sway velocity within 1.5 sigma of pre-transition nominal, zero gaze instability."
+}

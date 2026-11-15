@@ -1,0 +1,19 @@
+{
+  "card_id": "CARD-SAN-AMBER-01",
+  "version": "1.0",
+  "hazard": "hazard_4_gravity_fields",
+  "severity": "AMBER",
+  "title": "Spaceflight-Associated Neuro-ocular Syndrome (SANS) Monitoring & Cephalad Decompression",
+  "plain_language_summary": "Retinal nerve fiber layer (RNFL) thickening, optic sheath diameter expansion, or intraocular pressure shift observed.",
+  "crew_instructions": [
+    "Schedule 2-hour daily Lower Body Negative Pressure (LBNP) session at -25 mmHg to redistribute cephalad fluid shift.",
+    "Perform optical coherence tomography (OCT) or portable ultrasound optic nerve sheath diameter (ONSD) scan within 24 hours.",
+    "Evaluate visual acuity chart and log Amsler grid distortion notes.",
+    "Review sodium intake logs and maintain dietary sodium below 3,000 mg/day."
+  ],
+  "safety_limits": {
+    "max_onsd_mm": 5.8,
+    "max_iop_mmhg": 22.0
+  },
+  "de_escalation_criteria": "Optic nerve sheath diameter stabilized, RNFL thickness stable across two consecutive scans 7 days apart."
+}

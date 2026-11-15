@@ -1,0 +1,22 @@
+{
+  "card_id": "CARD-SLP-AMBER-01",
+  "version": "1.0",
+  "hazard": "hazard_2_isolation_and_confinement",
+  "severity": "AMBER",
+  "title": "Circadian Phase Realignment & Sleep Debt Countermeasure",
+  "plain_language_summary": "Autonomous operational protocol for astronauts exhibiting cumulative sleep deficit, circadian phase drift, or elevated psychomotor response latency in deep space confinement.",
+  "crew_instructions": [
+    "Verify sleep cabin environmental parameters: set ambient acoustic masking to 45 dBA and cabin temperature to 18-19°C.",
+    "Enforce dynamic blue-depleted lighting protocol (460 nm notch filtered) beginning 120 minutes prior to scheduled sleep onset.",
+    "Restrict strenuous aerobic or high-intensity resistive exercise to at least 3 hours prior to sleep window.",
+    "Avoid non-essential mission tasks during circadian nadir (MET 02:00 - 06:00 equivalent).",
+    "Perform 15-minute pre-sleep guided relaxation / autogenic breathing sequence via personal crew terminal.",
+    "Administer scheduled physiological monitoring: wearable actigraphy, sleep duration log, and 3-minute morning Psychomotor Vigilance Task (PVT)."
+  ],
+  "safety_limits": {
+    "minimum_sleep_opportunity": "8.5 hours in sleep compartment",
+    "maximum_continuous_duty": "16 hours without 8-hour rest period",
+    "pvt_lapse_threshold": "Maximum 3 lapses (>500ms) before dual-crew crosscheck required for critical flight operations"
+  },
+  "de_escalation_criteria": "Two consecutive sleep cycles with sleep efficiency >= 85%, sleep duration >= 7.0 hours, and PVT median reaction time < 260 ms."
+}

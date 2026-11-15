@@ -1,0 +1,19 @@
+{
+  "card_id": "CARD-RAD-AMBER-01",
+  "version": "1.0",
+  "hazard": "hazard_1_space_radiation",
+  "severity": "AMBER",
+  "title": "Solar Particle Event (SPE) Precursor & Biological Radioprotection Protocol",
+  "plain_language_summary": "Dosimetry rate exceeds nominal background or DNA repair marker trajectory shows elevated cumulative oxidative load.",
+  "crew_instructions": [
+    "Verify personal dosimeter placement and cross-check with module radiation sensor telemetry.",
+    "Prepare crew sleep quarters storm shelter shielding (water wall / polyethylene stowage configuration).",
+    "Administer pre-approved antioxidant nutritional supplementation pack as per flight surgeon protocol.",
+    "Queue peripheral blood sample for DNA damage (gamma-H2AX / 53BP1 kinetics) analysis at next scheduled pass."
+  ],
+  "safety_limits": {
+    "max_dose_rate_msv_hr": 10.0,
+    "cumulative_mission_dose_msv": 600.0
+  },
+  "de_escalation_criteria": "External dosimeter rate returns to nominal galactic cosmic ray (GCR) background level for > 6 hours."
+}

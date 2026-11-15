@@ -1,0 +1,20 @@
+{
+  "card_id": "CARD-CVD-AMBER-01",
+  "version": "1.0",
+  "hazard": "hazard_4_gravity_fields",
+  "severity": "AMBER",
+  "title": "Hemodynamic Posture Shift & Orthostatic Compensation Protocol",
+  "plain_language_summary": "Crew member shows significant blood pressure or heart rate deviation upon gravitational transition or postural shift.",
+  "crew_instructions": [
+    "Assume recumbent position immediately if lightheadedness or nausea score > 2.",
+    "Ingest 500 mL electrolyte solution (0.9% NaCl equivalent) over 15 minutes.",
+    "Don Lower Body Negative Pressure (LBNP) garment or apply lower-limb gradient compression sleeves.",
+    "Repeat seated-to-standing orthostatic blood pressure check in 30 minutes. Do not operate piloting controls."
+  ],
+  "safety_limits": {
+    "max_systolic_drop_mmhg": 25.0,
+    "max_heart_rate_bpm": 140.0,
+    "min_systolic_bp_mmhg": 85.0
+  },
+  "de_escalation_criteria": "Systolic drop < 10 mmHg on standing, HR normalized within +/- 1.5 sigma of baseline, zero subjective vestibular symptoms for 45 minutes."
+}

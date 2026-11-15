@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+
+# Data directories (store locally, track metadata only in git)
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/uploads/*
+!data/uploads/.gitkeep
+data/backups/*
+!data/backups/.gitkeep
+
+# Large binaries & models
+*.h5
+*.pt
+*.pth
+*.onnx
+*.pkl
+*.parquet
+
+# Testing & logs
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+logs/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

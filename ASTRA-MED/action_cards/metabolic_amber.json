@@ -1,0 +1,20 @@
+{
+  "card_id": "CARD-MET-AMBER-01",
+  "version": "1.0",
+  "hazard": "biosample_intelligence_engine",
+  "severity": "AMBER",
+  "title": "Metabolic & Renal Solute Balance Reversible Countermeasure",
+  "plain_language_summary": "Urinary specific gravity, serum creatinine, or electrolyte ratio deviation detected from nominal baseline.",
+  "crew_instructions": [
+    "Verify urine specific gravity and calculate hydration deficit index.",
+    "Adjust oral hydration protocol by +750 mL balanced electrolyte fluid over the next 6 hours.",
+    "Check calcium balance logs to ensure bone-remodeling countermeasure compliance.",
+    "Re-evaluate urine chemistry panel in 12 hours using onboard dry-chemistry cartridge."
+  ],
+  "safety_limits": {
+    "min_urine_output_ml_hr": 30.0,
+    "max_potassium_meq_l": 5.5,
+    "min_sodium_meq_l": 130.0
+  },
+  "de_escalation_criteria": "Serum and urine electrolytes normalize within 1.0 sigma of personal baseline, urine specific gravity 1.010 - 1.020."
+}

@@ -1,0 +1,19 @@
+{
+  "card_id": "CARD-IMM-AMBER-01",
+  "version": "1.0",
+  "hazard": "hazard_5_hostile_closed_environments",
+  "severity": "AMBER",
+  "title": "Immune Activation & Latent Viral Vigilance Protocol",
+  "plain_language_summary": "Elevated leukocyte shift, increased circulating inflammatory cytokines, or elevated latent viral marker index detected.",
+  "crew_instructions": [
+    "Verify environmental closed-loop air filtration and UV sterilization status in crew quarters.",
+    "Perform secondary saliva collection for viral DNA shedding quantification (EBV/VZV/HSV-1 panel).",
+    "Initiate standardized 8-hour sleep recovery window; suspend high-intensity physical training for 24 hours.",
+    "Log thermal profile and notify crew medical officer for non-invasive symptom tracking."
+  ],
+  "safety_limits": {
+    "max_oral_temp_celsius": 38.2,
+    "max_wbc_zscore": 3.0
+  },
+  "de_escalation_criteria": "Inflammatory cytokine markers return to within 1.5 sigma of personal baseline, normal thermal log for 48 hours."
+}
