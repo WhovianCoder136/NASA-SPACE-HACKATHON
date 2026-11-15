@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ASTRA-MED Single Page Application
  * Core screens, controllers, event bindings, and interactive telemetry views.
  */
@@ -163,7 +163,7 @@ window.submitCustomLogin = async (e) => {
   }
 };
 
-// ── Global Helper Functions ─────────────────────────────────────────────
+// â”€â”€ Global Helper Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 window.acknowledgeAlert = async (alertId) => {
   try {
     await API.acknowledgeAlert(alertId);
@@ -274,7 +274,7 @@ window.openSurgeonReviewModal = (reportId) => {
       <div class="form-group">
         <label>Clinical Decision</label>
         <select id="surg-decision" class="form-select">
-          <option value="approved">Approved — Concur with Onboard Action Cards</option>
+          <option value="approved">Approved â€” Concur with Onboard Action Cards</option>
           <option value="amended">Amended Protocol Guidance</option>
           <option value="escalated">Escalated Monitoring Required</option>
         </select>
@@ -344,7 +344,7 @@ window.syncEncounter = async (encounterId) => {
   }
 };
 
-// ── Helper to build crew selector dropdown ──────────────────────────────
+// â”€â”€ Helper to build crew selector dropdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 async function buildCrewSelector(selectedId, onChangeFnName = 'onCrewChange') {
   const crewList = await API.getCrew();
   if (crewList.length > 0 && !currentCrewId) {
@@ -371,9 +371,9 @@ window.onCrewChange = (newId) => {
   Router.handleRouteChange();
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 0A. DEDICATED HEALTH CHECKUP & MEDICAL RECORDS INTAKE SCREEN
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/health-checkup', async () => {
   window.updateSessionBadge();
   selectedCheckupFiles = [];
@@ -403,7 +403,7 @@ Router.register('/health-checkup', async () => {
   if (isOfficer && crewList.length > 0) {
     const opts = crewList.map((c) => {
       const aId = c.astronaut_id || `ASTRA-${c.id < 10 ? '00' + c.id : '0' + c.id}`;
-      return `<option value="${aId}" ${aId === targetAstronautId ? 'selected' : ''}>${c.name} (${aId}) — ${c.role}</option>`;
+      return `<option value="${aId}" ${aId === targetAstronautId ? 'selected' : ''}>${c.name} (${aId}) â€” ${c.role}</option>`;
     }).join('');
 
     targetSelectorHtml = `
@@ -412,7 +412,7 @@ Router.register('/health-checkup', async () => {
         <select id="chk-target-id" class="form-select" onchange="window.onProxyTargetChange(this.value)">
           ${opts}
         </select>
-        <span style="font-size: 0.75rem; color: var(--teal);">★ Flight Medical Officer clearance active: authorized to enter data for any flight crew member.</span>
+        <span style="font-size: 0.75rem; color: var(--teal);">â˜… Flight Medical Officer clearance active: authorized to enter data for any flight crew member.</span>
       </div>
     `;
   }
@@ -429,7 +429,7 @@ Router.register('/health-checkup', async () => {
           <p class="text-secondary">Comprehensive multi-hazard physiological assessment, point-of-care lab intake, and diagnostic report upload.</p>
         </div>
         <div style="display: flex; gap: 0.5rem;">
-          <a href="#/health-records" class="btn btn-outline">📂 View Health History (${totalCount})</a>
+          <a href="#/health-records" class="btn btn-outline">ðŸ“‚ View Health History (${totalCount})</a>
           ${offlineQueue.length > 0 ? `
             <button class="btn btn-amber btn-sm" onclick="window.syncOfflineQueue()">Sync Offline Buffer (${offlineQueue.length})</button>
           ` : ''}
@@ -447,7 +447,7 @@ Router.register('/health-checkup', async () => {
       <!-- Offline / Online Link Indicator -->
       <div id="checkup-connection-alert" class="mission-bar" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
         <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <span style="font-size: 1.25rem;">🩺</span>
+          <span style="font-size: 1.25rem;">ðŸ©º</span>
           <div>
             <strong>AUTONOMOUS FLIGHT CHECKUP INTAKE ACTIVE</strong>
             <div style="font-size: 0.8rem; color: var(--text-muted);">
@@ -460,11 +460,11 @@ Router.register('/health-checkup', async () => {
 
       <!-- Section 3: Structured Health Checkup Form -->
       <form id="health-checkup-form" onsubmit="window.submitRecentCheckup(event)">
-        
+
         <!-- A. Checkup Metadata Box -->
         <div class="card" style="margin-bottom: 1.5rem;">
           <h3 style="margin-bottom: 1rem; color: var(--teal); display: flex; align-items: center; gap: 0.5rem;">
-            <span>📋</span> A. Checkup Information
+            <span>ðŸ“‹</span> A. Checkup Information
           </h3>
           <div class="two-column-layout" style="gap: 1rem;">
             <div>
@@ -498,7 +498,7 @@ Router.register('/health-checkup', async () => {
               <div class="form-row">
                 <div class="form-group">
                   <label>Testing Location / Medical Bay</label>
-                  <input type="text" id="chk-location" class="form-input" value="Mars Transit Hab — Clinical Station">
+                  <input type="text" id="chk-location" class="form-input" value="Mars Transit Hab â€” Clinical Station">
                 </div>
                 <div class="form-group">
                   <label>Medical Officer Name (Optional)</label>
@@ -527,14 +527,14 @@ Router.register('/health-checkup', async () => {
             <button type="button" class="btn btn-xs btn-outline" onclick="window.toggleSectionBox('sec-sleep')">Sleep & Circadian</button>
             <button type="button" class="btn btn-xs btn-outline" onclick="window.toggleSectionBox('sec-neuromuscular')">Neuromuscular</button>
             <button type="button" class="btn btn-xs btn-outline" onclick="window.toggleSectionBox('sec-sans')">SANS & Ocular</button>
-            <button type="button" class="btn btn-xs btn-outline" onclick="window.toggleSectionBox('sec-upload')">📁 Upload Files</button>
+            <button type="button" class="btn btn-xs btn-outline" onclick="window.toggleSectionBox('sec-upload')">ðŸ“ Upload Files</button>
           </div>
         </div>
 
         <!-- B. Basic Physiological Measurements -->
         <div id="sec-basic" class="card checkup-section-card" style="margin-bottom: 1.5rem;">
           <h3 style="color: var(--teal); margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
-            <span>❤️ B. Basic Physiological Measurements</span>
+            <span>â¤ï¸ B. Basic Physiological Measurements</span>
             <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">All fields optional unless part of your scheduled checkup</span>
           </h3>
           <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">
@@ -554,7 +554,7 @@ Router.register('/health-checkup', async () => {
               <input type="number" step="1" id="m-bpdia" class="form-input" placeholder="e.g. 76" min="30" max="200">
             </div>
             <div class="form-group">
-              <label>Body Temperature (°C)</label>
+              <label>Body Temperature (Â°C)</label>
               <input type="number" step="0.1" id="m-temp" class="form-input" placeholder="e.g. 36.6" min="30" max="45">
             </div>
             <div class="form-group">
@@ -578,7 +578,7 @@ Router.register('/health-checkup', async () => {
 
         <!-- C. Cardiovascular Data -->
         <div id="sec-cardio" class="card checkup-section-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">🫀 C. Cardiovascular Data (GAR & Hemodynamics)</h3>
+          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">ðŸ«€ C. Cardiovascular Data (GAR & Hemodynamics)</h3>
           <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Supports resting hemodynamics, beat-to-beat ECG intervals, and orthostatic tolerance testing.</p>
           <div class="form-grid-3">
             <div class="form-group">
@@ -606,11 +606,11 @@ Router.register('/health-checkup', async () => {
 
         <!-- D. Blood and Immune Data -->
         <div id="sec-blood" class="card checkup-section-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">🩸 D. Blood & Immune Laboratory Data</h3>
+          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">ðŸ©¸ D. Blood & Immune Laboratory Data</h3>
           <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Enter CBC and immune biomarkers (NASA OSD-575 reference panel).</p>
           <div class="form-grid-3">
             <div class="form-group">
-              <label>WBC Count (x10³/μL)</label>
+              <label>WBC Count (x10Â³/Î¼L)</label>
               <input type="number" step="0.1" id="m-wbc" class="form-input" placeholder="e.g. 6.5">
             </div>
             <div class="form-group">
@@ -638,7 +638,7 @@ Router.register('/health-checkup', async () => {
               <input type="number" step="0.1" id="m-hb" class="form-input" placeholder="e.g. 15.2">
             </div>
             <div class="form-group">
-              <label>Platelet Count (x10³/μL)</label>
+              <label>Platelet Count (x10Â³/Î¼L)</label>
               <input type="number" step="1" id="m-plt" class="form-input" placeholder="e.g. 245">
             </div>
             <div class="form-group">
@@ -646,7 +646,7 @@ Router.register('/health-checkup', async () => {
               <input type="number" step="0.1" id="m-il6" class="form-input" placeholder="e.g. 1.8">
             </div>
             <div class="form-group">
-              <label>TNF-α Cytokine (pg/mL)</label>
+              <label>TNF-Î± Cytokine (pg/mL)</label>
               <input type="number" step="0.1" id="m-tnf" class="form-input" placeholder="e.g. 3.2">
             </div>
           </div>
@@ -654,7 +654,7 @@ Router.register('/health-checkup', async () => {
 
         <!-- E. Metabolic Data -->
         <div id="sec-metabolic" class="card checkup-section-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">⚗️ E. Metabolic & Chemistry Data (CMP)</h3>
+          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">âš—ï¸ E. Metabolic & Chemistry Data (CMP)</h3>
           <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Renal clearance, electrolyte balance, and bone mineral markers.</p>
           <div class="form-grid-3">
             <div class="form-group">
@@ -686,7 +686,7 @@ Router.register('/health-checkup', async () => {
 
         <!-- F. Radiation Data -->
         <div id="sec-radiation" class="card checkup-section-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">☢️ F. Radiation Dosimetry Data</h3>
+          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">â˜¢ï¸ F. Radiation Dosimetry Data</h3>
           <div class="form-grid-3">
             <div class="form-group">
               <label>Daily Exposure Rate (mSv/day)</label>
@@ -697,7 +697,7 @@ Router.register('/health-checkup', async () => {
               <input type="number" step="0.1" id="m-rad-cum" class="form-input" placeholder="e.g. 168.4">
             </div>
             <div class="form-group">
-              <label>γ-H2AX Foci (foci/cell)</label>
+              <label>Î³-H2AX Foci (foci/cell)</label>
               <input type="number" step="0.1" id="m-rad-h2ax" class="form-input" placeholder="e.g. 1.2">
             </div>
           </div>
@@ -705,7 +705,7 @@ Router.register('/health-checkup', async () => {
 
         <!-- G. Sleep and Circadian Data -->
         <div id="sec-sleep" class="card checkup-section-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">🌙 G. Sleep & Circadian Data</h3>
+          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">ðŸŒ™ G. Sleep & Circadian Data</h3>
           <div class="form-grid-3">
             <div class="form-group">
               <label>Sleep Duration (hours)</label>
@@ -736,7 +736,7 @@ Router.register('/health-checkup', async () => {
 
         <!-- H. Neuromuscular Data -->
         <div id="sec-neuromuscular" class="card checkup-section-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">💪 H. Neuromuscular & Sensorimotor Data</h3>
+          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">ðŸ’ª H. Neuromuscular & Sensorimotor Data</h3>
           <div class="form-grid-3">
             <div class="form-group">
               <label>Dynamic Gait Symmetry (%)</label>
@@ -755,14 +755,14 @@ Router.register('/health-checkup', async () => {
 
         <!-- I. SANS / Ocular Data -->
         <div id="sec-sans" class="card checkup-section-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">👁️ I. SANS & Neuro-Ocular Data</h3>
+          <h3 style="color: var(--teal); margin-bottom: 0.5rem;">ðŸ‘ï¸ I. SANS & Neuro-Ocular Data</h3>
           <div class="form-grid-3">
             <div class="form-group">
               <label>Optic Nerve Sheath Diameter (mm)</label>
               <input type="number" step="0.1" id="m-sans-onsd" class="form-input" placeholder="e.g. 5.1">
             </div>
             <div class="form-group">
-              <label>RNFL Thickness (μm)</label>
+              <label>RNFL Thickness (Î¼m)</label>
               <input type="number" step="1" id="m-sans-rnfl" class="form-input" placeholder="e.g. 104">
             </div>
             <div class="form-group">
@@ -775,7 +775,7 @@ Router.register('/health-checkup', async () => {
         <!-- Section 4: Supporting Medical Report Upload System -->
         <div id="sec-upload" class="card" style="margin-bottom: 1.5rem;">
           <h3 style="color: var(--teal); margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
-            <span>📁 Supporting Medical Reports & Diagnostic Files</span>
+            <span>ðŸ“ Supporting Medical Reports & Diagnostic Files</span>
             <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">PDF, DICOM, Images, ECG Waveforms</span>
           </h3>
           <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">
@@ -801,7 +801,7 @@ Router.register('/health-checkup', async () => {
   document.getElementById('app').innerHTML = html;
 });
 
-// ── Form Helper Functions ───────────────────────────────────────────────
+// â”€â”€ Form Helper Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 window.toggleSectionBox = (secId) => {
   const el = document.getElementById(secId);
@@ -862,7 +862,7 @@ window.renderSelectedFilesList = () => {
   const itemsHtml = selectedCheckupFiles.map((f, idx) => `
     <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.75rem; background: rgba(30, 41, 59, 0.6); border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 0.35rem; font-size: 0.85rem;">
       <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <span>📎</span>
+        <span>ðŸ“Ž</span>
         <strong>${f.name}</strong>
         <span class="text-muted">(${(f.size / 1024).toFixed(1)} KB)</span>
       </div>
@@ -888,7 +888,7 @@ window.resetCheckupForm = () => {
   window.renderSelectedFilesList();
 };
 
-// ── Submit Checkup Handler ──────────────────────────────────────────────
+// â”€â”€ Submit Checkup Handler â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 window.submitRecentCheckup = async (e) => {
   e.preventDefault();
@@ -926,7 +926,7 @@ window.submitRecentCheckup = async (e) => {
   addM('basic', 'heart_rate', 'm-hr', 'bpm', '60 - 100');
   addM('basic', 'bp_systolic', 'm-bpsys', 'mmHg', '90 - 120');
   addM('basic', 'bp_diastolic', 'm-bpdia', 'mmHg', '60 - 80');
-  addM('basic', 'temperature', 'm-temp', '°C', '36.1 - 37.2');
+  addM('basic', 'temperature', 'm-temp', 'Â°C', '36.1 - 37.2');
   addM('basic', 'respiratory_rate', 'm-resp', 'breaths/min', '12 - 20');
   addM('basic', 'spo2', 'm-spo2', '%', '95 - 100');
   addM('basic', 'weight', 'm-weight', 'kg');
@@ -937,14 +937,14 @@ window.submitRecentCheckup = async (e) => {
   addM('cardiovascular', 'hrv_rmssd', 'm-hrv', 'ms', '30 - 80');
 
   // Blood & Immune
-  addM('immune', 'wbc_count', 'm-wbc', 'x10³/μL', '4.5 - 11.0');
+  addM('immune', 'wbc_count', 'm-wbc', 'x10Â³/Î¼L', '4.5 - 11.0');
   addM('immune', 'neutrophil_pct', 'm-neut', '%', '40 - 70');
   addM('immune', 'lymphocyte_pct', 'm-lymph', '%', '20 - 45');
   addM('immune', 'monocyte_pct', 'm-mono', '%', '2 - 8');
   addM('immune', 'eosinophil_pct', 'm-eos', '%', '1 - 4');
   addM('immune', 'basophil_pct', 'm-baso', '%', '0.5 - 1.0');
   addM('immune', 'hemoglobin', 'm-hb', 'g/dL', '13.8 - 17.2');
-  addM('immune', 'platelets', 'm-plt', 'x10³/μL', '150 - 450');
+  addM('immune', 'platelets', 'm-plt', 'x10Â³/Î¼L', '150 - 450');
   addM('immune', 'il6', 'm-il6', 'pg/mL', '< 5.0');
   addM('immune', 'tnf_alpha', 'm-tnf', 'pg/mL', '< 8.0');
 
@@ -976,7 +976,7 @@ window.submitRecentCheckup = async (e) => {
 
   // SANS
   addM('sans', 'optic_disc_diameter', 'm-sans-onsd', 'mm', '< 5.8');
-  addM('sans', 'rnfl_thickness', 'm-sans-rnfl', 'μm', '90 - 110');
+  addM('sans', 'rnfl_thickness', 'm-sans-rnfl', 'Î¼m', '90 - 110');
   addM('sans', 'iop', 'm-sans-iop', 'mmHg', '12 - 20');
 
   const idempotencyKey = `IDEMP-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`;
@@ -1036,17 +1036,17 @@ window.renderCheckupConfirmation = (conf) => {
   confContainer.classList.remove('hidden');
 
   const modulesProcessedHtml = (conf.modules_processed || []).map((m) => `
-    <span class="badge badge-green" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">✓ ${m.toUpperCase()}</span>
+    <span class="badge badge-green" style="margin-right: 0.5rem; margin-bottom: 0.5rem;">âœ“ ${m.toUpperCase()}</span>
   `).join('') || '<span class="text-muted">No ML models triggered</span>';
 
   const warningsHtml = (conf.validation_warnings || []).map((w) => `
-    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 0.25rem;">▲ ${w}</div>
+    <div style="font-size: 0.85rem; color: var(--amber); margin-bottom: 0.25rem;">â–² ${w}</div>
   `).join('') || '<div class="text-muted" style="font-size: 0.85rem;">All measurements passed clinical validity boundaries.</div>';
 
   confContainer.innerHTML = `
     <div class="card" style="border: 1px solid var(--teal); background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(15, 23, 42, 0.9)); padding: 2rem;">
       <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-        <span style="font-size: 2.5rem;">✅</span>
+        <span style="font-size: 2.5rem;">âœ…</span>
         <div>
           <h2 style="margin: 0; color: var(--teal);">${conf.status}</h2>
           <div style="color: var(--text-secondary); font-size: 0.9rem;">
@@ -1084,9 +1084,9 @@ window.renderCheckupConfirmation = (conf) => {
   `;
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 0B. ASTRONAUT HEALTH RECORDS HISTORY SCREEN
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/health-records', async () => {
   window.updateSessionBadge();
   const targetAstronautId = activeUser ? activeUser.astronaut_id : 'ASTRA-001';
@@ -1291,7 +1291,7 @@ Router.register('/dashboard', async () => {
 
   let alertFeedHtml = '';
   if (activeAlerts.length === 0) {
-    alertFeedHtml = Components.renderEmptyState('Nominal Flight Status — All astronaut baselines within physiological boundaries.');
+    alertFeedHtml = Components.renderEmptyState('Nominal Flight Status â€” All astronaut baselines within physiological boundaries.');
   } else {
     alertFeedHtml = activeAlerts.slice(0, 5).map((a) => Components.renderAlertCard(a)).join('');
   }
@@ -1321,14 +1321,14 @@ Router.register('/dashboard', async () => {
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
         <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(15, 23, 42, 0.8)); border-color: rgba(20, 184, 166, 0.4);">
           <div>
-            <h4 style="margin: 0; color: var(--teal); font-size: 1rem;">💡 Health Insight Centre</h4>
+            <h4 style="margin: 0; color: var(--teal); font-size: 1rem;">ðŸ’¡ Health Insight Centre</h4>
             <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: var(--text-secondary);">Review synthesized physiological observations & pre-approved actions</p>
           </div>
           <a href="#/insights" class="btn btn-teal btn-sm">Open Insights &rarr;</a>
         </div>
         <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(15, 23, 42, 0.8)); border-color: rgba(56, 189, 248, 0.4);">
           <div>
-            <h4 style="margin: 0; color: #38bdf8; font-size: 1rem;">📡 Medical Comms & Telemedicine</h4>
+            <h4 style="margin: 0; color: #38bdf8; font-size: 1rem;">ðŸ“¡ Medical Comms & Telemedicine</h4>
             <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: var(--text-secondary);">Asynchronous store-and-forward queue & flight surgeon reviews</p>
           </div>
           <a href="#/medical-comms" class="btn btn-primary btn-sm">Open Comms &rarr;</a>
@@ -1362,9 +1362,9 @@ Router.register('/dashboard', async () => {
   document.getElementById('app').innerHTML = html;
 });
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 1B. INSIGHT CENTRE (Central Intelligence Engine)
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/insights', async (params) => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const filterSev = params.get('severity') || '';
@@ -1397,7 +1397,7 @@ Router.register('/insights', async (params) => {
         <p style="font-size: 0.85rem; margin: 0.5rem 0; color: var(--text-secondary);">${t.description}</p>
         ${t.status === 'pending' ? `
           <button class="btn btn-teal btn-xs" onclick="window.acknowledgeAction('${t.action_id}')">Acknowledge Execution</button>
-        ` : `<span style="font-size: 0.8rem; color: var(--teal);">✓ Completed at ${new Date(t.acknowledged_at || t.created_at).toLocaleTimeString()}</span>`}
+        ` : `<span style="font-size: 0.8rem; color: var(--teal);">âœ“ Completed at ${new Date(t.acknowledged_at || t.created_at).toLocaleTimeString()}</span>`}
       </div>
     `).join('');
 
@@ -1485,9 +1485,9 @@ window.assignActionToCrew = async (actionId) => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 1C. MEDICAL COMMUNICATION & DELAYED TELEMEDICINE CENTRE
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/medical-comms', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const [reports, syncStatus, queue] = await Promise.all([
@@ -1527,7 +1527,7 @@ Router.register('/medical-comms', async () => {
       <!-- Deep Space Comms Latency Indicator -->
       <div class="mission-bar" style="background: rgba(30, 41, 59, 0.7); border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
         <div style="display: flex; align-items: center; gap: 1rem;">
-          <span style="font-size: 1.5rem;">📡</span>
+          <span style="font-size: 1.5rem;">ðŸ“¡</span>
           <div>
             <strong style="color: var(--teal);">DEEP SPACE STORE-AND-FORWARD NETWORK LINK: ACTIVE</strong>
             <div style="font-size: 0.85rem; color: var(--text-secondary);">One-Way Light Speed Delay: ~20.0 min (Mars Transit) | Buffering: AES-256-GCM / SHA-256 Audit Trail</div>
@@ -1587,9 +1587,9 @@ window.syncAllPendingReports = async () => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 2. CREW MANAGEMENT SCREEN
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/crew', async () => {
   const crewList = await API.getCrew();
 
@@ -1607,7 +1607,7 @@ Router.register('/crew', async () => {
       return `
         <div class="crew-card">
           <div class="crew-header">
-            <div class="crew-avatar">👨‍🚀</div>
+            <div class="crew-avatar">ðŸ‘¨â€ðŸš€</div>
             <div>
               <h3>${member.name}</h3>
               <span class="crew-role">${member.role}</span>
@@ -1682,9 +1682,9 @@ window.submitNewCrew = async (e) => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 3. CARDIOVASCULAR & GRAVITY ADAPTATION (GAR) SCREEN
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/cardiovascular', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const [vitals, baselines, mlHealth] = await Promise.all([
@@ -1702,7 +1702,7 @@ Router.register('/cardiovascular', async () => {
     <div class="screen-container">
       <div class="screen-header">
         <div>
-          <h2>Hazard 4: Gravity Adaptation & Rehabilitation (GAR) — Cardiovascular</h2>
+          <h2>Hazard 4: Gravity Adaptation & Rehabilitation (GAR) â€” Cardiovascular</h2>
           <p class="text-secondary">Hemodynamic tracking, orthostatic tolerance, continuous arterial BP, and beat-to-beat ECG analysis.</p>
         </div>
       </div>
@@ -1764,7 +1764,13 @@ Router.register('/cardiovascular', async () => {
           <h3>Cardiovascular ML Inference (PTB-XL Module)</h3>
           <p class="text-secondary">Drop-in inference engine testing beat-level morphological features.</p>
           <button class="btn btn-primary" onclick="window.runCardioML()">Execute ML Inference</button>
-          <div id="cardio-ml-result" class="ml-output-box">
+
+          <div class="form-group">
+            <label>12-lead ECG CSV (12 ? 1000 or 1000 ? 12)</label>
+            <input type="file" id="trained-file-cardio" class="form-input" accept=".csv">
+          </div>
+          <button class="btn btn-teal" onclick="window.uploadTrainedML('cardiovascular','trained-file-cardio','cardio-ml-result')">Run Trained ECG CNN</button>
+<div id="cardio-ml-result" class="ml-output-box">
             <span class="text-muted">Click above to execute model inference.</span>
           </div>
         </div>
@@ -1804,7 +1810,7 @@ window.submitCardioVitals = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Telemetry ingested. Deviation z-score: BP ${r1.deviation.z_score}, HR ${r2.deviation.z_score}.
+        âœ“ Telemetry ingested. Deviation z-score: BP ${r1.deviation.z_score}, HR ${r2.deviation.z_score}.
         ${r1.alert_triggered ? `<span class="badge badge-amber">ALERT TRIGGERED: ${r1.action_card_id}</span>` : '<span class="badge badge-green">BASELINE NOMINAL</span>'}
       </div>
     `;
@@ -1839,9 +1845,9 @@ window.runCardioML = async () => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 4. IMMUNE SYSTEM & CLOSED ENVIRONMENTS (OSD-575)
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/immune', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const mlHealth = await API.mlModuleHealth('immune');
@@ -1850,8 +1856,8 @@ Router.register('/immune', async () => {
     <div class="screen-container">
       <div class="screen-header">
         <div>
-          <h2>Hazard 5: Hostile/Closed Environments — Immune Vigilance</h2>
-          <p class="text-secondary">WBC differential, lymphocyte suppression, inflammatory cytokines (IL-6, TNF-α), and latent virus reactivation.</p>
+          <h2>Hazard 5: Hostile/Closed Environments â€” Immune Vigilance</h2>
+          <p class="text-secondary">WBC differential, lymphocyte suppression, inflammatory cytokines (IL-6, TNF-Î±), and latent virus reactivation.</p>
         </div>
       </div>
 
@@ -1860,7 +1866,7 @@ Router.register('/immune', async () => {
       <div class="stats-grid">
         ${Components.renderStatCard('Immune Status', 'NOMINAL', '', 'Adaptive reserve stable', 'GREEN')}
         ${Components.renderStatCard('Viral Reactivation', 'NEGATIVE', '', 'EBV / VZV / HSV-1')}
-        ${Components.renderStatCard('Inflammatory Index', '1.1 σ', '', 'Normal baseline range')}
+        ${Components.renderStatCard('Inflammatory Index', '1.1 Ïƒ', '', 'Normal baseline range')}
         ${Components.renderStatCard('Predictor (OSD-575)', mlHealth.status.toUpperCase(), '', mlHealth.version, mlHealth.status === 'live' ? 'GREEN' : 'AMBER')}
       </div>
 
@@ -1870,7 +1876,7 @@ Router.register('/immune', async () => {
           { met: 130, val: 6.8 }, { met: 132, val: 6.5 }, { met: 134, val: 6.9 },
           { met: 136, val: 6.3 }, { met: 138, val: 6.6 }, { met: 140, val: 6.4 },
           { met: 142, val: 6.7 }
-        ], 6.5, 0.8, 'x10³/μL')}
+        ], 6.5, 0.8, 'x10Â³/Î¼L')}
       </div>
 
       <div class="two-column-layout">
@@ -1880,7 +1886,7 @@ Router.register('/immune', async () => {
           <form onsubmit="window.submitImmuneMeasurements(event)">
             <div class="form-row">
               <div class="form-group">
-                <label>WBC Count (x10³/μL)</label>
+                <label>WBC Count (x10Â³/Î¼L)</label>
                 <input type="number" step="0.1" id="imm-wbc" class="form-input" value="6.5" required>
               </div>
               <div class="form-group">
@@ -1894,7 +1900,7 @@ Router.register('/immune', async () => {
                 <input type="number" step="0.1" id="imm-il6" class="form-input" value="1.8" required>
               </div>
               <div class="form-group">
-                <label>TNF-α (pg/mL)</label>
+                <label>TNF-Î± (pg/mL)</label>
                 <input type="number" step="0.1" id="imm-tnf" class="form-input" value="3.2" required>
               </div>
             </div>
@@ -1908,7 +1914,18 @@ Router.register('/immune', async () => {
           <h3>Immune ML Prediction (NASA OSD-575 Model)</h3>
           <p class="text-secondary">Evaluates cytokine balance and immune suppression risk.</p>
           <button class="btn btn-primary" onclick="window.runImmuneML()">Execute Immune Predictor</button>
-          <div id="immune-ml-result" class="ml-output-box">
+
+          <div class="form-group">
+            <label>Baseline subject</label>
+            <select id="trained-subject-immune" class="form-input">
+              <option value="C001">C001</option><option value="C002">C002</option>
+              <option value="C003">C003</option><option value="C004">C004</option>
+            </select>
+            <label>Immune measurements CSV</label>
+            <input type="file" id="trained-file-immune" class="form-input" accept=".csv">
+          </div>
+          <button class="btn btn-teal" onclick="window.uploadTrainedML('immune','trained-file-immune','immune-ml-result','trained-subject-immune')">Run Baseline Analysis</button>
+<div id="immune-ml-result" class="ml-output-box">
             <span class="text-muted">Click above to analyze immune profile.</span>
           </div>
         </div>
@@ -1929,12 +1946,12 @@ window.submitImmuneMeasurements = async (e) => {
       domain: 'immune',
       metric_name: 'wbc_count',
       value: wbc,
-      unit: 'x10³/μL',
+      unit: 'x10Â³/Î¼L',
     });
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ingested WBC metric. Observation: ${res.observation}
+        âœ“ Ingested WBC metric. Observation: ${res.observation}
       </div>
     `;
   } catch (err) {
@@ -1970,9 +1987,9 @@ window.runImmuneML = async () => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 5. METABOLIC & CMP SCREEN
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/metabolic', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const mlHealth = await API.mlModuleHealth('metabolic');
@@ -2037,7 +2054,18 @@ Router.register('/metabolic', async () => {
           <h3>Metabolic Panel ML Inference</h3>
           <p class="text-secondary">Assesses renal clearance, osmotic shifts, and calcium mobilization.</p>
           <button class="btn btn-primary" onclick="window.runMetabolicML()">Run Metabolic Assessment</button>
-          <div id="met-ml-result" class="ml-output-box"><span class="text-muted">Click to run.</span></div>
+
+          <div class="form-group">
+            <label>Baseline subject</label>
+            <select id="trained-subject-metabolic" class="form-input">
+              <option value="C001">C001</option><option value="C002">C002</option>
+              <option value="C003">C003</option><option value="C004">C004</option>
+            </select>
+            <label>Metabolic measurements CSV</label>
+            <input type="file" id="trained-file-metabolic" class="form-input" accept=".csv">
+          </div>
+          <button class="btn btn-teal" onclick="window.uploadTrainedML('metabolic','trained-file-metabolic','met-ml-result','trained-subject-metabolic')">Run Baseline Analysis</button>
+<div id="met-ml-result" class="ml-output-box"><span class="text-muted">Click to run.</span></div>
         </div>
       </div>
     </div>
@@ -2060,7 +2088,7 @@ window.submitMetabolicMeasurements = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ingested glucose. Observation: ${res.observation}
+        âœ“ Ingested glucose. Observation: ${res.observation}
       </div>
     `;
   } catch (err) {
@@ -2096,9 +2124,9 @@ window.runMetabolicML = async () => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 6. RADIATION HEALTH (OSD-157)
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/radiation', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const mlHealth = await API.mlModuleHealth('radiation');
@@ -2108,14 +2136,14 @@ Router.register('/radiation', async () => {
       <div class="screen-header">
         <div>
           <h2>Hazard 1: Space Radiation Health (OSD-157)</h2>
-          <p class="text-secondary">Cumulative GCR & SPE dose tracking, DNA double-strand break repair (γ-H2AX), and gene-expression stress signatures.</p>
+          <p class="text-secondary">Cumulative GCR & SPE dose tracking, DNA double-strand break repair (Î³-H2AX), and gene-expression stress signatures.</p>
         </div>
       </div>
       ${crewSelector}
       <div class="stats-grid">
         ${Components.renderStatCard('Cumulative Mission Dose', '168.4', 'mSv', 'Limit: 600 mSv', 'GREEN')}
         ${Components.renderStatCard('Current Dose Rate', '1.42', 'mSv/day', 'Nominal GCR background')}
-        ${Components.renderStatCard('γ-H2AX Foci Index', '1.2', 'foci/cell', 'DNA repair kinetics active')}
+        ${Components.renderStatCard('Î³-H2AX Foci Index', '1.2', 'foci/cell', 'DNA repair kinetics active')}
         ${Components.renderStatCard('Predictor (OSD-157)', mlHealth.status.toUpperCase(), '', mlHealth.version, mlHealth.status === 'live' ? 'GREEN' : 'AMBER')}
       </div>
 
@@ -2144,7 +2172,7 @@ Router.register('/radiation', async () => {
               </div>
             </div>
             <div class="form-group">
-              <label>γ-H2AX DNA Repair Foci (foci/cell)</label>
+              <label>Î³-H2AX DNA Repair Foci (foci/cell)</label>
               <input type="number" step="0.1" id="rad-h2ax" class="form-input" value="1.2" required>
             </div>
             <button type="submit" class="btn btn-teal">Log Dosimetry & Check Baseline</button>
@@ -2157,7 +2185,13 @@ Router.register('/radiation', async () => {
           <h3>Radiation Risk Predictor (OSD-157)</h3>
           <p class="text-secondary">Assesses double-strand break repair kinetics and deep-space biological stress.</p>
           <button class="btn btn-primary" onclick="window.runRadML()">Run Radiation Risk Assessment</button>
-          <div id="rad-ml-result" class="ml-output-box"><span class="text-muted">Click to run.</span></div>
+
+          <div class="form-group">
+            <label>Radiation gene-expression CSV (17,259 features)</label>
+            <input type="file" id="trained-file-radiation" class="form-input" accept=".csv">
+          </div>
+          <button class="btn btn-teal" onclick="window.uploadTrainedML('radiation','trained-file-radiation','rad-ml-result')">Run Trained Radiation Model</button>
+<div id="rad-ml-result" class="ml-output-box"><span class="text-muted">Click to run.</span></div>
         </div>
       </div>
     </div>
@@ -2180,7 +2214,7 @@ window.submitRadiationMeasurements = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ingested dosimetry. Observation: ${res.observation}
+        âœ“ Ingested dosimetry. Observation: ${res.observation}
       </div>
     `;
   } catch (err) {
@@ -2214,9 +2248,9 @@ window.runRadML = async () => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 6B. SLEEP & CIRCADIAN RHYTHM SCREEN (Hazard 2: Isolation & Confinement)
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/sleep', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const mlHealth = await API.mlModuleHealth('sleep');
@@ -2225,7 +2259,7 @@ Router.register('/sleep', async () => {
     <div class="screen-container">
       <div class="screen-header">
         <div>
-          <h2>Hazard 2: Isolation & Confinement — Sleep & Circadian Vigilance</h2>
+          <h2>Hazard 2: Isolation & Confinement â€” Sleep & Circadian Vigilance</h2>
           <p class="text-secondary">Actigraphy duration, sleep architecture (REM / N3 Deep), circadian phase shift, and psychomotor vigilance (PVT).</p>
         </div>
       </div>
@@ -2293,7 +2327,13 @@ Router.register('/sleep', async () => {
           <h3>Sleep & Circadian Rhythm Evaluator</h3>
           <p class="text-secondary">Assesses cumulative fatigue, circadian desynchrony, and cognitive degradation risk.</p>
           <button class="btn btn-primary" onclick="window.runSleepML()">Execute Sleep Assessment</button>
-          <div id="slp-ml-result" class="ml-output-box"><span class="text-muted">Click to run.</span></div>
+
+          <div class="form-group">
+            <label>Sleep feature CSV (57 model features)</label>
+            <input type="file" id="trained-file-sleep" class="form-input" accept=".csv">
+          </div>
+          <button class="btn btn-teal" onclick="window.uploadTrainedML('sleep','trained-file-sleep','slp-ml-result')">Run Trained Sleep Model</button>
+<div id="slp-ml-result" class="ml-output-box"><span class="text-muted">Click to run.</span></div>
         </div>
       </div>
     </div>
@@ -2317,7 +2357,7 @@ window.submitSleepMeasurements = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ingested sleep duration. Observation: ${res.observation}
+        âœ“ Ingested sleep duration. Observation: ${res.observation}
       </div>
     `;
   } catch (err) {
@@ -2354,9 +2394,9 @@ window.runSleepML = async () => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 7. NEUROMUSCULAR & SENSORIMOTOR GAIT
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/neuromuscular', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const mlHealth = await API.mlModuleHealth('neuromuscular');
@@ -2415,7 +2455,18 @@ Router.register('/neuromuscular', async () => {
           <h3>Multimodal Gait & Postural Sway Inference</h3>
           <p class="text-secondary">Analyzes sensorimotor adaptation and postural ataxia in altered gravity fields.</p>
           <button class="btn btn-primary" onclick="window.runNeuromuscularML()">Execute Sensorimotor Assessment</button>
-          <div id="neu-ml-result" class="ml-output-box"><span class="text-muted">Click to evaluate gait.</span></div>
+
+          <div class="form-group">
+            <label>Gait model input type</label>
+            <select id="trained-type-neu" class="form-input">
+              <option value="emg">EMG (143 features)</option>
+              <option value="multimodal">Multimodal (287 features)</option>
+            </select>
+            <label>Gait feature CSV</label>
+            <input type="file" id="trained-file-neu" class="form-input" accept=".csv">
+          </div>
+          <button class="btn btn-teal" onclick="window.uploadTrainedML('neuromuscular','trained-file-neu','neu-ml-result',null,'trained-type-neu')">Run Trained Gait Model</button>
+<div id="neu-ml-result" class="ml-output-box"><span class="text-muted">Click to evaluate gait.</span></div>
         </div>
       </div>
     </div>
@@ -2438,7 +2489,7 @@ window.submitNeuromuscularMeasurements = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ingested gait kinematics. Observation: ${res.observation}
+        âœ“ Ingested gait kinematics. Observation: ${res.observation}
       </div>
     `;
   } catch (err) {
@@ -2473,9 +2524,9 @@ window.runNeuromuscularML = async () => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 8. SANS (SPACEFLIGHT-ASSOCIATED NEURO-OCULAR SYNDROME)
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/sans', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const mlHealth = await API.mlModuleHealth('sans');
@@ -2491,7 +2542,7 @@ Router.register('/sans', async () => {
       ${crewSelector}
       <div class="stats-grid">
         ${Components.renderStatCard('ONSD (Optic Sheath)', '5.1', 'mm', 'Nominal threshold < 5.8 mm', 'GREEN')}
-        ${Components.renderStatCard('RNFL Thickness', '104', 'μm', 'Baseline reference stability')}
+        ${Components.renderStatCard('RNFL Thickness', '104', 'Î¼m', 'Baseline reference stability')}
         ${Components.renderStatCard('Intraocular Pressure', '15.2', 'mmHg', 'Normal range 12 - 20 mmHg')}
         ${Components.renderStatCard('Predictor (SANS)', mlHealth.status.toUpperCase(), '', mlHealth.version, mlHealth.status === 'live' ? 'GREEN' : 'AMBER')}
       </div>
@@ -2516,7 +2567,7 @@ Router.register('/sans', async () => {
                 <input type="number" step="0.1" id="sans-onsd" class="form-input" value="5.1" required>
               </div>
               <div class="form-group">
-                <label>RNFL Thickness (μm)</label>
+                <label>RNFL Thickness (Î¼m)</label>
                 <input type="number" step="1" id="sans-rnfl" class="form-input" value="104" required>
               </div>
             </div>
@@ -2534,7 +2585,13 @@ Router.register('/sans', async () => {
           <h3>Optic Ultrasound & MRI SANS Predictor</h3>
           <p class="text-secondary">Assesses cephalad venous congestion and papilledema risk.</p>
           <button class="btn btn-primary" onclick="window.runSANSML()">Execute SANS Predictor</button>
-          <div id="sans-ml-result" class="ml-output-box"><span class="text-muted">Click to evaluate.</span></div>
+
+          <div class="form-group">
+            <label>Retinal / optic-disc image</label>
+            <input type="file" id="trained-file-sans" class="form-input" accept=".png,.jpg,.jpeg,.tif,.tiff,.bmp">
+          </div>
+          <button class="btn btn-teal" onclick="window.uploadTrainedML('sans','trained-file-sans','sans-ml-result')">Run SANS Image Segmentation</button>
+<div id="sans-ml-result" class="ml-output-box"><span class="text-muted">Click to evaluate.</span></div>
         </div>
       </div>
     </div>
@@ -2557,7 +2614,7 @@ window.submitSANSMeasurements = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ingested ONSD. Observation: ${res.observation}
+        âœ“ Ingested ONSD. Observation: ${res.observation}
       </div>
     `;
   } catch (err) {
@@ -2592,9 +2649,9 @@ window.runSANSML = async () => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 9. ALERTS MANAGEMENT SCREEN
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/alerts', async (params) => {
   const severityFilter = params.get('severity') || '';
   const hazardFilter = params.get('hazard') || '';
@@ -2656,9 +2713,9 @@ window.filterAlerts = (key, val) => {
   Router.navigate(`/alerts?${currentParams.toString()}`);
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 10. ACTION CARDS REPOSITORY SCREEN
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/action-cards', async () => {
   const cards = await API.getActionCards();
 
@@ -2694,9 +2751,9 @@ Router.register('/action-cards', async () => {
   document.getElementById('app').innerHTML = html;
 });
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 11. PERSONAL BASELINES SCREEN
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/baselines', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
   const baselines = await API.getBaselines(currentCrewId);
@@ -2707,11 +2764,11 @@ Router.register('/baselines', async () => {
       <tr>
         <td><strong>${b.metric_name}</strong></td>
         <td>${b.mean.toFixed(2)}</td>
-        <td>± ${b.std.toFixed(2)}</td>
+        <td>Â± ${b.std.toFixed(2)}</td>
         <td>${b.n_samples}</td>
         <td>
           <span class="badge ${b.frozen ? 'badge-amber' : 'badge-green'}">
-            ${b.frozen ? '❄ FROZEN' : 'ACTIVE'}
+            ${b.frozen ? 'â„ FROZEN' : 'ACTIVE'}
           </span>
         </td>
         <td>
@@ -2739,7 +2796,7 @@ Router.register('/baselines', async () => {
             <tr>
               <th>Metric</th>
               <th>Nominal Mean</th>
-              <th>Std Dev (σ)</th>
+              <th>Std Dev (Ïƒ)</th>
               <th>Sample Count</th>
               <th>Anomaly Lock</th>
               <th>Action</th>
@@ -2756,9 +2813,9 @@ Router.register('/baselines', async () => {
   document.getElementById('app').innerHTML = html;
 });
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 12. BIOSAMPLE INTELLIGENCE ENGINE (LABORATORY INTAKE)
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/biosamples', async () => {
   const crewSelector = await buildCrewSelector(currentCrewId);
 
@@ -2775,9 +2832,9 @@ Router.register('/biosamples', async () => {
 
       <!-- Specimen Tabs -->
       <div class="tabs-nav">
-        <button class="tab-btn active" onclick="window.switchBioTab('blood')">🩸 Blood (CBC & Cytokines)</button>
-        <button class="tab-btn" onclick="window.switchBioTab('urine')">🧪 Urine (Renal & Solutes)</button>
-        <button class="tab-btn" onclick="window.switchBioTab('saliva')">💧 Saliva (Stress & Viral Markers)</button>
+        <button class="tab-btn active" onclick="window.switchBioTab('blood')">ðŸ©¸ Blood (CBC & Cytokines)</button>
+        <button class="tab-btn" onclick="window.switchBioTab('urine')">ðŸ§ª Urine (Renal & Solutes)</button>
+        <button class="tab-btn" onclick="window.switchBioTab('saliva')">ðŸ’§ Saliva (Stress & Viral Markers)</button>
       </div>
 
       <!-- Blood Tab Panel -->
@@ -2787,7 +2844,7 @@ Router.register('/biosamples', async () => {
           <form onsubmit="window.submitBloodSample(event)">
             <div class="form-grid-3">
               <div class="form-group">
-                <label>Total WBC (x10³/μL)</label>
+                <label>Total WBC (x10Â³/Î¼L)</label>
                 <input type="number" step="0.1" id="blood-wbc" class="form-input" value="6.5" required>
               </div>
               <div class="form-group">
@@ -2799,7 +2856,7 @@ Router.register('/biosamples', async () => {
                 <input type="number" step="0.1" id="blood-neut" class="form-input" value="61.5" required>
               </div>
               <div class="form-group">
-                <label>Platelets (x10³/μL)</label>
+                <label>Platelets (x10Â³/Î¼L)</label>
                 <input type="number" step="1" id="blood-plt" class="form-input" value="240" required>
               </div>
               <div class="form-group">
@@ -2807,7 +2864,7 @@ Router.register('/biosamples', async () => {
                 <input type="number" step="0.1" id="blood-il6" class="form-input" value="1.8">
               </div>
               <div class="form-group">
-                <label>TNF-α Cytokine (pg/mL)</label>
+                <label>TNF-Î± Cytokine (pg/mL)</label>
                 <input type="number" step="0.1" id="blood-tnf" class="form-input" value="3.2">
               </div>
             </div>
@@ -2853,7 +2910,7 @@ Router.register('/biosamples', async () => {
           <form onsubmit="window.submitSalivaSample(event)">
             <div class="form-grid-3">
               <div class="form-group">
-                <label>Salivary Free Cortisol (μg/dL)</label>
+                <label>Salivary Free Cortisol (Î¼g/dL)</label>
                 <input type="number" step="0.01" id="saliva-cortisol" class="form-input" value="0.45" required>
               </div>
               <div class="form-group">
@@ -2903,7 +2960,7 @@ window.submitBloodSample = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ingested ${res.processed_analytes} blood biomarkers. Quality control passed.
+        âœ“ Ingested ${res.processed_analytes} blood biomarkers. Quality control passed.
       </div>
     `;
   } catch (err) {
@@ -2926,7 +2983,7 @@ window.submitUrineSample = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ingested ${res.processed_analytes} urine parameters. Quality control passed.
+        âœ“ Ingested ${res.processed_analytes} urine parameters. Quality control passed.
       </div>
     `;
   } catch (err) {
@@ -2948,7 +3005,7 @@ window.submitSalivaSample = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ingested ${res.processed_analytes} saliva parameters. Quality control passed.
+        âœ“ Ingested ${res.processed_analytes} saliva parameters. Quality control passed.
       </div>
     `;
   } catch (err) {
@@ -2956,9 +3013,9 @@ window.submitSalivaSample = async (e) => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // 13. GROUND REVIEW & DELAYED TELEMEDICINE SCREEN
-// ═════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 Router.register('/ground-review', async () => {
   const [queue, depth] = await Promise.all([
     API.getGroundQueue(),
@@ -2986,7 +3043,7 @@ Router.register('/ground-review', async () => {
     <div class="screen-container">
       <div class="screen-header">
         <div>
-          <h2>Hazard 3: Distance from Earth — Ground Review & Telemedicine</h2>
+          <h2>Hazard 3: Distance from Earth â€” Ground Review & Telemedicine</h2>
           <p class="text-secondary">Asynchronous Store-and-Forward Encounter Packages buffer telemetry during 20-min light latency windows.</p>
         </div>
       </div>
@@ -3064,7 +3121,7 @@ window.submitPhysicianReview = async (e) => {
     resBox.classList.remove('hidden');
     resBox.innerHTML = `
       <div class="success-banner">
-        ✓ Ground review received from ${review.reviewer} and logged in mission record.
+        âœ“ Ground review received from ${review.reviewer} and logged in mission record.
       </div>
     `;
   } catch (err) {
@@ -3072,5 +3129,49 @@ window.submitPhysicianReview = async (e) => {
   }
 };
 
-// ── Application Initialization ──────────────────────────────────────────
+// â”€â”€ Application Initialization â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 Router.init();
+
+
+// Upload-based inference using the trained model adapters.
+window.uploadTrainedML = async (
+  moduleName, fileInputId, resultBoxId, subjectSelectId = null, modelTypeSelectId = null
+) => {
+  const fileInput = document.getElementById(fileInputId);
+  const box = document.getElementById(resultBoxId);
+  const file = fileInput?.files?.[0];
+
+  if (!file) {
+    alert('Please select an input file first.');
+    return;
+  }
+
+  box.textContent = `Uploading ${file.name} and running ${moduleName} model...`;
+
+  const metadata = {
+    crew_id: currentCrewId,
+    timestamp_met: Date.now() / 3600000
+  };
+
+  if (subjectSelectId) {
+    metadata.subject_id = document.getElementById(subjectSelectId)?.value;
+  }
+  if (modelTypeSelectId) {
+    metadata.model_type = document.getElementById(modelTypeSelectId)?.value;
+  }
+
+  try {
+    const result = await API.mlUpload(moduleName, file, metadata);
+    const output = document.createElement('pre');
+    output.style.whiteSpace = 'pre-wrap';
+    output.style.overflowWrap = 'anywhere';
+    output.textContent = JSON.stringify(result, null, 2);
+
+    box.replaceChildren();
+    const heading = document.createElement('strong');
+    heading.textContent = `${moduleName.toUpperCase()} ? TRAINED MODEL RESULT`;
+    box.append(heading, output);
+  } catch (err) {
+    box.textContent = `Inference failed: ${err.message}`;
+  }
+};

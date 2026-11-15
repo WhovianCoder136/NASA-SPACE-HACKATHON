@@ -1,0 +1,22 @@
+
+{
+  "card_id": "CARD-CVD-AMBER-02",
+  "version": "1.0",
+  "hazard": "hazard_4_gravity_fields",
+  "severity": "AMBER",
+  "title": "Cardiac Rhythm & Electrocardiographic Monitoring Protocol",
+  "plain_language_summary": "Abnormal heart rate trends, rhythm irregularities, or ECG deviations from the crew member's established cardiovascular baseline have been detected.",
+  "crew_instructions": [
+    "Verify ECG electrode placement and repeat a 12-lead ECG recording when available.",
+    "Repeat heart rate and blood pressure measurements to confirm the observed deviation.",
+    "Record symptoms including palpitations, chest discomfort, dizziness, breathlessness, or fainting.",
+    "Review recent cardiovascular telemetry and compare findings with the crew member's personal baseline.",
+    "Notify the crew medical officer and transmit ECG and vital-sign data for ground review."
+  ],
+  "safety_limits": {
+    "max_heart_rate_bpm": 140.0,
+    "min_heart_rate_bpm": 45.0,
+    "ecg_reassessment_interval_minutes": 15
+  },
+  "de_escalation_criteria": "Heart rate and ECG measurements return to established personal baseline, no concerning symptoms are reported, and repeat monitoring remains stable."
+}

@@ -175,6 +175,23 @@ const API = {
   mlPredict(moduleName, data) {
     return this.post(`/ml/${moduleName}/predict`, data);
   },
+
+  mlUpload(moduleName, file, metadata = {}) {
+    const form = new FormData();
+    form.append('file', file);
+    form.append('crew_id', metadata.crew_id ?? 1);
+    form.append('timestamp_met', metadata.timestamp_met ?? 0);
+
+    if (metadata.subject_id) form.append('subject_id', metadata.subject_id);
+    if (metadata.timepoint) form.append('timepoint', metadata.timepoint);
+    if (metadata.sampling_rate) form.append('sampling_rate', metadata.sampling_rate);
+    if (metadata.model_type) form.append('model_type', metadata.model_type);
+
+    return this.request(`/ml/${moduleName}/upload`, {
+      method: 'POST',
+      body: form,
+    });
+  },
   mlHealth() {
     return this.get('/ml/health');
   },
@@ -213,7 +230,14 @@ const API = {
   acknowledgeAction(actionId, notes = '') {
     return this.post(`/actions/${encodeURIComponent(actionId)}/acknowledge`, { notes });
   },
+// ── Store & Forward Synchronization ──
+getSyncStatus() {
+  return this.get('/sync/status');
+},
 
+getSyncQueue() {
+  return this.get('/sync/queue');
+},
   // ── Medical Reports & Asynchronous Telemedicine ──
   getMedicalReports(params = {}) {
     const query = new URLSearchParams(params).toString();

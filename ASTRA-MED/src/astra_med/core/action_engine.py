@@ -1,20 +1,18 @@
-"""ASTRA-MED Action Engine.
 
-Maintains a comprehensive library of flight-surgeon pre-approved, non-diagnostic
-support actions, countermeasures, and workflow tasks. Handles crew assignment,
-acknowledgment, and tracking.
-"""
+"""ASTRA-MED Action Engine."""
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
 from typing import Any, Dict, List, Optional
+
 from sqlalchemy.orm import Session
 
 from astra_med.db import crud
 from astra_med.db.models import ActionTaskRecord
 
 
-# Pre-approved operational library
 PREAPPROVED_ACTIONS: List[Dict[str, Any]] = [
     {
         "action_id": "ACT-HYD-01",
@@ -43,7 +41,7 @@ PREAPPROVED_ACTIONS: List[Dict[str, Any]] = [
     {
         "action_id": "ACT-RPT-04",
         "title": "Repeat Telemetry Verification Cycle",
-        "description": "Conduct repeat vital measurement (continuous BP cuff and 3-lead ECG) in 15 minutes to confirm trajectory of observed deviation.",
+        "description": "Conduct repeat vital measurement in 15 minutes to confirm observed deviation.",
         "source": "preapproved_action_library",
         "approval_required": False,
         "hazard": "general",
@@ -51,7 +49,7 @@ PREAPPROVED_ACTIONS: List[Dict[str, Any]] = [
     {
         "action_id": "ACT-EXR-05",
         "title": "Countermeasure Resistive Ergometer Adjustment",
-        "description": "Maintain daily cycle ergometer / ARED resistive loading at 75% VO2max for 45 minutes; adjust harness load to 80% body mass equivalent.",
+        "description": "Maintain the approved daily exercise countermeasure schedule.",
         "source": "preapproved_action_library",
         "approval_required": False,
         "hazard": "hazard_4_gravity_fields",
@@ -59,7 +57,7 @@ PREAPPROVED_ACTIONS: List[Dict[str, Any]] = [
     {
         "action_id": "ACT-REP-06",
         "title": "Compile Ground Telemedicine Encounter Dossier",
-        "description": "Bundle recent telemetry, baseline deviation statistics, and action card execution record into store-and-forward package for Earth review.",
+        "description": "Bundle recent telemetry, baseline deviation statistics, and action card execution records for Earth review.",
         "source": "preapproved_action_library",
         "approval_required": False,
         "hazard": "hazard_3_distance_from_earth",
@@ -68,37 +66,60 @@ PREAPPROVED_ACTIONS: List[Dict[str, Any]] = [
 
 
 class ActionEngine:
-    """Orchestrates pre-approved operational actions and task acknowledgments."""
+    """Orchestrates operational actions and task acknowledgments."""
 
     def __init__(self, action_library: Optional[List[Dict[str, Any]]] = None):
         self.library = action_library or PREAPPROVED_ACTIONS
 
     def get_library(self) -> List[Dict[str, Any]]:
-        return self.library
+        """Load all JSON action cards from the project action_cards directory."""
+        project_root = Path(__file__).resolve().parents[3]
+        action_cards_dir = project_root / "action_cards"
+
+        library = []
+
+        if not action_cards_dir.exists():
+            return library
+
+        for card_file in sorted(action_cards_dir.glob("*.json")):
+            try:
+                with card_file.open("r", encoding="utf-8") as file:
+                    card = json.load(file)
+                    library.append(card)
+            except (json.JSONDecodeError, OSError) as error:
+                print(f"Failed to load {card_file.name}: {error}")
+
+        return library
 
     def get_action_by_id(self, action_id: str) -> Optional[Dict[str, Any]]:
-        for act in self.library:
-            if act["action_id"] == action_id:
-                return act
+        for action in self.library:
+            if action["action_id"] == action_id:
+                return action
         return None
 
-    def recommend_for_module(self, module: str, severity: str = "monitor") -> List[Dict[str, Any]]:
-        """Find appropriate pre-approved actions based on affected health module."""
+    def recommend_for_module(
+        self,
+        module: str,
+        severity: str = "monitor",
+    ) -> List[Dict[str, Any]]:
         mod = module.lower()
-        recs = []
-        if "cardio" in mod or "gravity" in mod:
-            recs.extend([self.get_action_by_id("ACT-HYD-01"), self.get_action_by_id("ACT-PST-02")])
-        elif "sleep" in mod or "isolation" in mod:
-            recs.append(self.get_action_by_id("ACT-SLP-03"))
-        elif "metabolic" in mod:
-            recs.append(self.get_action_by_id("ACT-HYD-01"))
-        
-        # In all cases of warning or critical, recommend repeat verification and ground report
-        if severity in ("warning", "critical"):
-            recs.append(self.get_action_by_id("ACT-RPT-04"))
-            recs.append(self.get_action_by_id("ACT-REP-06"))
+        recommendations = []
 
-        return [r for r in recs if r is not None]
+        if "cardio" in mod or "gravity" in mod:
+            recommendations.extend([
+                self.get_action_by_id("ACT-HYD-01"),
+                self.get_action_by_id("ACT-PST-02"),
+            ])
+        elif "sleep" in mod or "isolation" in mod:
+            recommendations.append(self.get_action_by_id("ACT-SLP-03"))
+        elif "metabolic" in mod:
+            recommendations.append(self.get_action_by_id("ACT-HYD-01"))
+
+        if severity in ("warning", "critical"):
+            recommendations.append(self.get_action_by_id("ACT-RPT-04"))
+            recommendations.append(self.get_action_by_id("ACT-REP-06"))
+
+        return [item for item in recommendations if item is not None]
 
     def dispatch_action(
         self,
@@ -107,10 +128,9 @@ class ActionEngine:
         action_id: str,
         notes: Optional[str] = None,
     ) -> ActionTaskRecord:
-        """Instantiate an action as an active task for an astronaut."""
         template = self.get_action_by_id(action_id)
+
         if not template:
-            # Fallback custom or card id
             return crud.create_action_task(
                 session=session,
                 action_id=action_id,
@@ -138,5 +158,8 @@ class ActionEngine:
         action_id: str,
         notes: Optional[str] = None,
     ) -> Optional[ActionTaskRecord]:
-        """Acknowledge action execution."""
-        return crud.acknowledge_action_task(session, action_id, notes=notes)
+        return crud.acknowledge_action_task(
+            session,
+            action_id,
+            notes=notes,
+        )
