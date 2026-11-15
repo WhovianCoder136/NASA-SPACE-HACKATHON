@@ -5,15 +5,18 @@ on:
 
 permissions:
   contents: read
-  codespaces: write
 
 jobs:
-  restart:
+  check:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check and restart Codespace
+      - name: Check GitHub CLI
+        run: gh --version
+
+      - name: List ASTRA-MED Codespaces
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh codespace list --repo WhovianCoder136/NASA-SPACE-HACKATHON
+          gh codespace list \
+            --repo WhovianCoder136/NASA-SPACE-HACKATHON
